@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    environment:
+      PORT: 9292
+      RUBY_YJIT_ENABLE: 1
+      DB_POOL_SIZE: 10
+      DB_HOST: postgres
+      WEB_CONCURRENCY: 2
+      RACK_ENV: production
+      REDIS_HOST: redis
+      REDIS_POOL_SIZE: 50
+    ports:
+      - "9292:9292"
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    command: redis-server --save "" --appendonly no --maxclients 100
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
