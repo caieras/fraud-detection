@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'rackup', '~> 2.1'
 gem 'rack-attack', '~> 5.0', '>= 5.0.1'
 gem 'sinatra', '~> 4.0'
+gem 'sinatra-contrib'
 gem 'pg', '~> 1.5', '>= 1.5.6'
 gem 'sequel', '~> 5.82'
 gem 'sequel_pg', '~> 1.17', '>= 1.17.1', require: false

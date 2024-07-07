@@ -12,7 +12,7 @@ require 'dotenv'
 Dotenv.load(".env.#{environment}", '.env')
 
 # Load the application
-require './config/application'
+require './config/router'
 
 # Use Rack::Deflater for compression
 use Rack::Deflater
@@ -21,4 +21,4 @@ use Rack::Deflater
 use Rack::Attack
 
 # Run the application
-run Application
+run Router

@@ -11,6 +11,7 @@ GEM
     json (2.7.2)
     language_server-protocol (3.17.0.3)
     method_source (1.1.0)
+    multi_json (1.15.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.7.3)
@@ -84,6 +85,12 @@ GEM
       rack-protection (= 4.0.0)
       rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
+    sinatra-contrib (4.0.0)
+      multi_json (>= 0.0.2)
+      mustermann (~> 3.0)
+      rack-protection (= 4.0.0)
+      sinatra (= 4.0.0)
+      tilt (~> 2.0)
     strscan (3.1.0)
     tilt (2.4.0)
     unicode-display_width (2.5.0)
@@ -108,6 +115,7 @@ DEPENDENCIES
   sequel (~> 5.82)
   sequel_pg (~> 1.17, >= 1.17.1)
   sinatra (~> 4.0)
+  sinatra-contrib
   zeitwerk (~> 2.6, >= 2.6.16)
 
 BUNDLED WITH
