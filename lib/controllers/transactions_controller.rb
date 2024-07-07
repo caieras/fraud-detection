@@ -8,7 +8,7 @@ module Controllers
       Services::Transactions::List.call
     end
 
-    def fraud_check      
+    def fraud_check
     end
 
     private
