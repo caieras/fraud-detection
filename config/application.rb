@@ -3,6 +3,8 @@ require 'sequel'
 
 class Application < Sinatra::Base
   configure do
+    set :root, File.dirname(__FILE__)
+
     template = ERB.new File.new('config/database.yml').read
     db_config = YAML.load(template.result(binding), aliases: true)
     db_config = db_config[environment.to_s]
@@ -21,9 +23,10 @@ class Application < Sinatra::Base
     redis_config = YAML.load_file('config/redis.yml')[environment.to_s]
     set :redis, Redis.new(
       host: redis_config['host'],
-      port: redis_config['port'],
+      port: redis_config['port']
     )
 
+    Redis::Objects.redis = Application.redis
     enable :logging
   end
 end

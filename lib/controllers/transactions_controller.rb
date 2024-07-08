@@ -9,6 +9,7 @@ module Controllers
     end
 
     def fraud_check
+      binding.pry
       Services::Transactions::FraudCheck.call(validate_params)
     end
 
