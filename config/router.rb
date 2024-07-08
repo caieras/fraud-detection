@@ -12,7 +12,7 @@ class Router < Application
       Controllers::TransactionsController.new.index
     end
 
-    post '/transactions/check' do
+    post '/transactions/fraud_check' do
       Controllers::TransactionsController.new(request.body.read).fraud_check
     end
   end

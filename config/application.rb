@@ -17,7 +17,7 @@ class Application < Sinatra::Base
           database: db_config['database'],
           pool: db_config['pool']
         )
-
+    
     enable :logging
   end
 end
