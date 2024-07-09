@@ -10,8 +10,8 @@ RSpec.describe Services::RiskEngine::Rules::AmountLimit do
 
     context 'when transaction amount exceeds limit' do
       before do
-        allow(transaction).to receive(:transaction_date).and_return(Time.new(2023, 1, 1, 12, 0, 0))
-        allow(transaction).to receive(:transaction_amount).and_return(25_000)
+        allow(transaction).to receive(:transaction_date).and_return(Time.new(2023, 1, 1, 21, 0, 0))
+        allow(transaction).to receive(:transaction_amount).and_return(2000)
       end
 
       it 'returns failed check' do
@@ -22,7 +22,7 @@ RSpec.describe Services::RiskEngine::Rules::AmountLimit do
     context 'when transaction amount is within limit' do
       before do
         allow(transaction).to receive(:transaction_date).and_return(Time.new(2023, 1, 1, 12, 0, 0))
-        allow(transaction).to receive(:transaction_amount).and_return(15_000)
+        allow(transaction).to receive(:transaction_amount).and_return(100)
       end
 
       it 'returns passed check' do
@@ -32,8 +32,8 @@ RSpec.describe Services::RiskEngine::Rules::AmountLimit do
 
     context 'when transaction is during night time' do
       before do
-        allow(transaction).to receive(:transaction_date).and_return(Time.new(2023, 1, 1, 22, 0, 0))
-        allow(transaction).to receive(:transaction_amount).and_return(11_000)
+        allow(transaction).to receive(:transaction_date).and_return(Time.new(2023, 1, 1, 2, 0, 0))
+        allow(transaction).to receive(:transaction_amount).and_return(1001)
       end
 
       it 'returns failed check' do

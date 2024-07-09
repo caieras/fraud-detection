@@ -5,8 +5,8 @@ module Services
     module Rules
       class AmountLimit
         NIGHT_START_HOUR = 20
-        NIGHT_END_HOUR = 2
-        MAX_TRANSACTION_AMOUNT = 10_000
+        NIGHT_END_HOUR = 5
+        MAX_TRANSACTION_AMOUNT = 1000
 
         def self.check(user_transactions, transaction)
           new(user_transactions, transaction).check
@@ -29,11 +29,13 @@ module Services
 
         def exceeds_amount_limit?
           current_hour = @current_transaction.transaction_date.hour
-          night_time = (current_hour >= NIGHT_START_HOUR || current_hour < NIGHT_END_HOUR)
-          
-          limit = night_time ? MAX_TRANSACTION_AMOUNT : MAX_TRANSACTION_AMOUNT * 2
+          night_time = current_hour >= NIGHT_START_HOUR || current_hour < NIGHT_END_HOUR
 
-          @current_transaction.transaction_amount > limit
+          if night_time
+            @current_transaction.transaction_amount > MAX_TRANSACTION_AMOUNT
+          else
+            false
+          end
         end
       end
     end
