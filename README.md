@@ -2,7 +2,7 @@
 
 This project is a Sinatra-based API for fraud detection. It uses PostgreSQL as the database and Redis for caching and background job processing.
 
-## Archtecture
+## Architecture
 ### MVC Pattern with Sinatra
 
 We chose MVC for this Sinatra app primarily for its simplicity and familiarity within the Ruby community. 
@@ -32,12 +32,12 @@ Sinatra acts as our router, directing requests to the appropriate controllers.
 - **Encrypted Tables**: Sensitive data, such as credit card information, is stored in encrypted database tables to ensure data protection at rest.
 - **Environment Variables**: Sensitive configuration is stored in environment variables, not in the codebase.
 
-### Testing and Quality Assurance
+### Testing
 
 - **RSpec**: Used for unit and integration testing.
 - **Rubocop**: Ensures code style consistency across the project.
 
-### Deployment and Scaling
+### Deployment
 
 - **Docker**: The application is containerized, allowing for easy deployment and scaling.
 - **Docker Compose**: Used for defining and running multi-container Docker applications, simplifying the development and deployment process.
@@ -62,7 +62,6 @@ bundle install
 ```
 3. Set up the database:
 ```
-- Create a PostgreSQL database
 $ psql -d postgres -f db/init.sql
 ```
 4. Set up environment variables:
@@ -83,9 +82,34 @@ redis-server
 rackup
 ```
 
-## Using Docker
+## Running with Docker
 
 1. Just run: 
-````
+```
 docker-compose up
-````
+```
+
+## Example payload
+```json
+{
+  "transaction_id" : 2342357,
+  "merchant_id" : 29744,
+  "user_id" : 97051,
+  "card_number" : "434505******9116",
+  "transaction_date" : "2019-11-31T23:16:32.812632",
+  "transaction_amount" : 373,
+  "device_id" : 285475
+}
+```
+## Example response
+```json
+{
+  "transaction_id" : 2342357,
+  "merchant_id" : 29744,
+  "user_id" : 97051,
+  "card_number" : "434505******9116",
+  "transaction_date" : "2019-11-31T23:16:32.812632",
+  "transaction_amount" : 373,
+  "device_id" : 285475
+}
+```
