@@ -2,6 +2,8 @@
 
 This project is a Sinatra-based API for fraud detection. It uses PostgreSQL as the database and Redis for caching and background job processing.
 
+### 3.1 - [Understand the Industry](https://github.com/caieras/fraud-detection/blob/main/3.1.md)
+### 3.2 - [Get your hands dirty](https://github.com/caieras/fraud-detection/blob/main/3.2.md)
 ## Architecture
 ### MVC Pattern with Sinatra
 
@@ -54,7 +56,7 @@ Sinatra acts as our router, directing requests to the appropriate controllers.
 
 1. Clone the repository:
 ```
-git clone 
+gh repo clone caieras/fraud-detection
 ```
 2. Install dependencies:
 ```
