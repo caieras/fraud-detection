@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 threads_min = ENV.fetch('PUMA_THREADS_MIN') { 0 }.to_i
 threads_max = ENV.fetch('PUMA_THREADS_MAX') { 12 }.to_i
 threads threads_min, threads_max

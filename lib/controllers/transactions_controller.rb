@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Controllers
   class TransactionsController
     def initialize(params = {})
