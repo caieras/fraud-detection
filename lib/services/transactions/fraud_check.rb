@@ -9,13 +9,12 @@ module Services
 
       def initialize(transaction_params)
         @transaction_params = transaction_params
-        @response = Services::Concerns::ResponseBuilder.new
         @redis = Application.redis
       end
 
       def call
         transaction = Models::Transaction.new(@transaction_params)
-        return @response.fail(body: 'Invalid JSON Body').as_json unless transaction.valid?
+        return { body: 'invalid transaction'}.to_json unless transaction.valid?
 
         transaction.save
         analyze_risk_score = Services::RiskEngine::Analyzer.call(transaction, @redis)
