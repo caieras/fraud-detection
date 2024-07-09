@@ -20,10 +20,9 @@ class Application < Sinatra::Base
           pool: db_config['pool']
         )
 
-    redis_config = YAML.load_file('config/redis.yml')[environment.to_s]
     set :redis, Redis.new(
-      host: redis_config['host'],
-      port: redis_config['port']
+      host: ENV['REDIS_HOST'] || 'localhost',
+      port: 6379
     )
 
     Redis::Objects.redis = Application.redis

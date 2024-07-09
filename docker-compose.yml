@@ -1,5 +1,4 @@
 version: '3'
-
 services:
   api:
     build:
@@ -8,15 +7,16 @@ services:
     container_name: api
     environment:
       PORT: 9292
+      ENCRYPTION_KEY: 'e768d1c67d6db8ee24d5ba7de6a32f56'
       RUBY_YJIT_ENABLE: 1
       DB_HOST: postgres
       DB_PORT: 5432
-      DB_NAME: fraud_detection_production
+      DB_NAME: fraud_detection_development
       DB_USER: postgres
       DB_PASSWORD: password
       DB_POOL_SIZE: 10
       WEB_CONCURRENCY: 2
-      RACK_ENV: production
+      RACK_ENV: development
       REDIS_HOST: redis
       REDIS_POOL_SIZE: 50
     ports:
@@ -29,13 +29,14 @@ services:
     image: postgres
     container_name: postgres
     environment:
-      POSTGRES_DB: fraud_detection_production
+      POSTGRES_DB: fraud_detection_development
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   redis:
     image: redis:latest

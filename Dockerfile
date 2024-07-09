@@ -1,7 +1,12 @@
 FROM ruby:3.3.3 AS base
 
 ENV RUBY_YJIT_ENABLE=1
+
 WORKDIR /app
+
+RUN apt-get update && \
+    apt-get install -y netcat-openbsd libpq-dev && \
+    rm -rf /var/lib/apt/lists/*
 
 # Copy Gemfile and Gemfile.lock
 COPY Gemfile Gemfile.lock ./
