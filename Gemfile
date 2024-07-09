@@ -20,6 +20,7 @@ gem 'dotenv', '~> 3.1', '>= 3.1.2'
 group :development, :test do
   gem 'pry'
   gem 'rake', '~> 13.2', '>= 13.2.1'
+  gem 'rack-test'
   gem 'rspec'
   gem 'rubocop'
 end

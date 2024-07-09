@@ -1,15 +1,13 @@
 module Services
   module Transactions
     class FraudCheck
-      include Services::Concerns
-
       def self.call(transaction_params)
         new(transaction_params).call
       end
 
       def initialize(transaction_params)
         @transaction_params = transaction_params
-        @response = ResponseBuilder.new
+        @response = Services::Concerns::ResponseBuilder.new
         @redis = Application.redis
       end
 

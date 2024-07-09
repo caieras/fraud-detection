@@ -1,8 +1,6 @@
 module Services
   module RiskEngine
     class Analyzer
-      include Services::Concerns
-
       def self.call(transaction, redis)
         new(transaction, redis).call
       end
@@ -10,7 +8,7 @@ module Services
       def initialize(transaction, redis)
         @current_transaction = transaction
         @redis = redis
-        @response = ResponseBuilder.new
+        @response = Services::Concerns::ResponseBuilder.new
       end
 
       def call

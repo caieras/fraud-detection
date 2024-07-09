@@ -11,7 +11,7 @@ module Models
     plugin :timestamps
     
     plugin :column_encryption do |enc|
-      enc.key 0, ENV.fetch('ENCRYPTION_KEY')
+      enc.key 0, ENV.fetch('ENCRYPTION_KEY', 'e768d1c67d6db8ee24d5ba7de6a32f56')
       enc.column :card_number, searchable: true
     end
 
