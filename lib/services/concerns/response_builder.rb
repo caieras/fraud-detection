@@ -1,5 +1,5 @@
 module Services
-  module Helpers
+  module Concerns
     class ResponseBuilder
       attr_reader :status, :code, :body
 

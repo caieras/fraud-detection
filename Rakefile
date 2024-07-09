@@ -6,7 +6,7 @@ namespace :db do
     host: ENV.fetch('DB_HOST', 'localhost'),
     port: ENV.fetch('DB_PORT', 5432),
     database: ENV.fetch('DB_NAME', 'fraud_detection_development'),
-    user: ENV.fetch('DB_USER', 'postgres'),
+    user: ENV.fetch('DB_USER', 'fraud_detection'),
     password: ENV.fetch('DB_PASSWORD', 'password')
   )
 

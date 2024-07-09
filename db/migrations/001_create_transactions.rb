@@ -5,11 +5,12 @@ Sequel.migration do
       Integer :transaction_id, null: false
       Integer :merchant_id, null: false
       Integer :user_id, null: false
-      Integer :device_id, null: false
+      Integer :device_id
       String :card_number, null: false
+      String :last_four, null: false
       DateTime :transaction_date, null: false
-      BigDecimal :transaction_amount, null: false, size: [10, 2]
-      
+      Decimal :transaction_amount, null: false
+            
       index :transaction_id, unique: true
       index :merchant_id
       index :user_id

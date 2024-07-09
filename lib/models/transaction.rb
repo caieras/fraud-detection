@@ -1,49 +1,33 @@
 module Models
   class Transaction < Sequel::Model
     include Redis::Objects
+    include Concerns::RedisSync
+    
+    extend Concerns::RedisRetriever
+
+    redis_id_field :user_id
 
     plugin :validation_helpers
     plugin :timestamps
+    
+    plugin :column_encryption do |enc|
+      enc.key 0, ENV.fetch('ENCRYPTION_KEY')
+      enc.column :card_number, searchable: true
+    end
 
-    list :user_transactions, global: true
+    # set :recent_transactions, :marshal => true, :global => true
+    list :recent_user_transactions, :marshal => true, :maxlength => 5
 
-    def before_create
+    def before_save
+      super
+      self.last_four = card_number[-4..]
+    end
+
+    def after_save
       super
       sync_to_redis
     end
-
-    def sync_to_redis
-      transaction_data = {
-        transaction_id:,
-        user_id:,
-        card_number:,
-        transaction_date: transaction_date.iso8601,
-        transaction_amount:,
-        device_id:
-      }.to_json
-
-      self.class.user_transactions << transaction_data
-    end
-
-    def self.get_user_transactions(user_id)
-      all_transactions = user_transactions.values
-      user_transactions = all_transactions.map { |t| JSON.parse(t, symbolize_names: true) }
-                                          .select { |t| t[:user_id] == user_id }
-
-      user_transactions.map do |t|
-        new(user_id: t[:user_id], transaction_id: t[:transaction_id], card_number: t[:card_number],
-            transaction_date: Date.parse(t[:transaction_date]), transaction_amount: t[:transaction_amount],
-            device_id: t[:device_id])
-      end
-    end
-
-    def self.get_user_transactions_by_date_range(user_id, start_date, end_date)
-      transactions = get_user_transactions(user_id)
-      transactions.select { |t| t.date >= start_date && t.date <= end_date }
-    end
-
-    private
-
+  
     def validate
       super
       validates_presence %i[transaction_id merchant_id user_id card_number transaction_date transaction_amount]

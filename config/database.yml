@@ -4,7 +4,7 @@ default: &default
   pool: <%= ENV.fetch("DB_POOL_SIZE") { 10 } %>
   host: <%= ENV.fetch("DB_HOST") { "localhost" } %>
   port: <%= ENV.fetch("DB_PORT") { 5432 } %>
-  username: <%= ENV.fetch("DB_USER") { "postgres" } %>
+  username: <%= ENV.fetch("DB_USER") { "fraud_detection" } %>
   password: <%= ENV.fetch("DB_PASSWORD") { "password" } %>
 
 development:
