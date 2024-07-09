@@ -10,7 +10,8 @@ Sequel.migration do
       String :last_four, null: false
       DateTime :transaction_date, null: false
       Decimal :transaction_amount, null: false
-            
+      TrueClass :chargeback, default: false
+      
       index :transaction_id, unique: true
       index :merchant_id
       index :user_id

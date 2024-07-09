@@ -2,7 +2,6 @@ module Models
   module Concerns
     module RedisSync
       def sync_to_redis
-        # self.class.recent_transactions << transaction_data.to_json
         self.recent_user_transactions << transaction_data
       end
 
@@ -16,7 +15,8 @@ module Models
           last_four:,
           transaction_date: transaction_date.iso8601,
           transaction_amount:,
-          device_id:
+          device_id:,
+          chargeback:
         }
       end
     end

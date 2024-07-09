@@ -15,8 +15,7 @@ module Models
       enc.column :card_number, searchable: true
     end
 
-    # set :recent_transactions, :marshal => true, :global => true
-    list :recent_user_transactions, :marshal => true, :maxlength => 5
+    list :recent_user_transactions, :marshal => true, :maxlength => 10
 
     def before_save
       super

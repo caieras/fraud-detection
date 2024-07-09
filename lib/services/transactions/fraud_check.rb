@@ -23,6 +23,9 @@ module Services
         if analyze_risk_score.status == :success
           @response.success(body: 'Transaction approved').as_json
         else
+          chargeback_key = "user:#{transaction.user_id}:chargeback"
+          @redis.set(chargeback_key, 1)
+          transaction.update(chargeback: true)
           @response.fail(body: 'Transaction rejected due to high risk').as_json
         end
       end
